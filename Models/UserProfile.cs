@@ -27,7 +27,7 @@ public class UserProfile
     public List<ChoreAssignment> ChoreAssignments { get; set; }
     public List<ChoreCompletion> ChoreCompletions { get; set; }
 
-    // [NotMapped]
-    // public List<string> Roles { get; set; }
+    [NotMapped]
+    public List<string> Roles { get; set; }
 
 }
