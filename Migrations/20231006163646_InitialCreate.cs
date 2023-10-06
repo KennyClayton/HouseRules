@@ -50,7 +50,7 @@ namespace HouseRules.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Chore",
+                name: "Chores",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -61,7 +61,7 @@ namespace HouseRules.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Chore", x => x.Id);
+                    table.PrimaryKey("PK_Chores", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -192,7 +192,7 @@ namespace HouseRules.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChoreAssignment",
+                name: "ChoreAssignments",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -202,15 +202,15 @@ namespace HouseRules.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChoreAssignment", x => x.Id);
+                    table.PrimaryKey("PK_ChoreAssignments", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChoreAssignment_Chore_ChoreId",
+                        name: "FK_ChoreAssignments_Chores_ChoreId",
                         column: x => x.ChoreId,
-                        principalTable: "Chore",
+                        principalTable: "Chores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ChoreAssignment_UserProfiles_UserProfileId",
+                        name: "FK_ChoreAssignments_UserProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfiles",
                         principalColumn: "Id",
@@ -218,7 +218,7 @@ namespace HouseRules.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "ChoreCompletion",
+                name: "ChoreCompletions",
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
@@ -229,15 +229,15 @@ namespace HouseRules.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ChoreCompletion", x => x.Id);
+                    table.PrimaryKey("PK_ChoreCompletions", x => x.Id);
                     table.ForeignKey(
-                        name: "FK_ChoreCompletion_Chore_ChoreId",
+                        name: "FK_ChoreCompletions_Chores_ChoreId",
                         column: x => x.ChoreId,
-                        principalTable: "Chore",
+                        principalTable: "Chores",
                         principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
-                        name: "FK_ChoreCompletion_UserProfiles_UserProfileId",
+                        name: "FK_ChoreCompletions_UserProfiles_UserProfileId",
                         column: x => x.UserProfileId,
                         principalTable: "UserProfiles",
                         principalColumn: "Id",
@@ -247,15 +247,15 @@ namespace HouseRules.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "275981ff-4b58-4380-875c-b016d8aca561", "Admin", "admin" });
+                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "b70838ec-576f-48e9-8f00-3a1ba9150f7b", "Admin", "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "dcbf0981-e380-4442-b506-79ab7706373b", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEIaAL8J7gZDHUL05jisvqFHZ71U88UKQn9nDW8y7RoPu3P4+LYkxteF88xnRTNbkAQ==", null, false, "90b6ca18-46a5-442a-b09e-a49a3cda208b", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "abd6775d-c5d4-43ea-9a39-a28fc4e973eb", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEGr86Lj6Uve44r2+E8AAzANyRmkZ4nVNN8FVt6H66beIces2o7Phzfy27no2/QHnNA==", null, false, "1546eef0-2562-43c4-964c-99432d4cf17d", false, "Administrator" });
 
             migrationBuilder.InsertData(
-                table: "Chore",
+                table: "Chores",
                 columns: new[] { "Id", "ChoreFrequencyDays", "Difficulty", "Name" },
                 values: new object[,]
                 {
@@ -277,7 +277,7 @@ namespace HouseRules.Migrations
                 values: new object[] { 1, "101 Main Street", "Admina", "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", "Strator" });
 
             migrationBuilder.InsertData(
-                table: "ChoreAssignment",
+                table: "ChoreAssignments",
                 columns: new[] { "Id", "ChoreId", "UserProfileId" },
                 values: new object[,]
                 {
@@ -286,7 +286,7 @@ namespace HouseRules.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "ChoreCompletion",
+                table: "ChoreCompletions",
                 columns: new[] { "Id", "ChoreId", "CompletedOn", "UserProfileId" },
                 values: new object[,]
                 {
@@ -333,23 +333,23 @@ namespace HouseRules.Migrations
                 unique: true);
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChoreAssignment_ChoreId",
-                table: "ChoreAssignment",
+                name: "IX_ChoreAssignments_ChoreId",
+                table: "ChoreAssignments",
                 column: "ChoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChoreAssignment_UserProfileId",
-                table: "ChoreAssignment",
+                name: "IX_ChoreAssignments_UserProfileId",
+                table: "ChoreAssignments",
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChoreCompletion_ChoreId",
-                table: "ChoreCompletion",
+                name: "IX_ChoreCompletions_ChoreId",
+                table: "ChoreCompletions",
                 column: "ChoreId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_ChoreCompletion_UserProfileId",
-                table: "ChoreCompletion",
+                name: "IX_ChoreCompletions_UserProfileId",
+                table: "ChoreCompletions",
                 column: "UserProfileId");
 
             migrationBuilder.CreateIndex(
@@ -376,16 +376,16 @@ namespace HouseRules.Migrations
                 name: "AspNetUserTokens");
 
             migrationBuilder.DropTable(
-                name: "ChoreAssignment");
+                name: "ChoreAssignments");
 
             migrationBuilder.DropTable(
-                name: "ChoreCompletion");
+                name: "ChoreCompletions");
 
             migrationBuilder.DropTable(
                 name: "AspNetRoles");
 
             migrationBuilder.DropTable(
-                name: "Chore");
+                name: "Chores");
 
             migrationBuilder.DropTable(
                 name: "UserProfiles");

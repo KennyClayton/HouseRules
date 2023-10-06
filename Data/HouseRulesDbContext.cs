@@ -18,15 +18,14 @@ public class HouseRulesDbContext : IdentityDbContext<IdentityUser> //# HouseRule
 //* LEARN ABOUT DbSet properties and how they give access to the database to get and set values of the properties of our tables
 {
     //~ The first DbSet property "represents the Chore entity. It allows you to query and manipulate data in the "Chores" database table. 
-    //$ Each of these DbSet properties serves as an entry point for Entity Framework Core to perform database operations (e.g., querying, inserting, updating, deleting) on the corresponding entity types. 
+    //@ Each of these DbSet properties serves as an entry point for Entity Framework Core to perform database operations (e.g., querying, inserting, updating, deleting) on the corresponding entity types. 
     //~ When you use these properties in your code, Entity Framework Core generates SQL queries to interact with the database tables associated with these entity types.
-    //$ In summary, these DbSet properties define the data models or entities in your application and provide a way to interact with the database tables that store data related to those entities."
+    //@ In summary, these DbSet properties define the data models or entities in your application and provide a way to interact with the database tables that store data related to those entities."
     private readonly IConfiguration _configuration;
     public DbSet<Chore> Chores { get; set; } 
     //* IMPORTANT - Above is a DbSet property it allows us to get values of properties from the tables in the database. Ie - we can access the chores table, look at the Name property of any chore listed there and get the value of that name property returned to us. We can also SET the value of the name property on a chore....all through this "DbSet Chore property".
     public DbSet<ChoreAssignment> ChoreAssignments { get; set; } //Same here. We can get and set property values for ChoreAssignments in the database
     public DbSet<ChoreCompletion> ChoreCompletions { get; set; } //Same here. This is our entry point into the database to retrieve data and/or submit changes to data for ChoreCompletions
-    public DbSet<Registration> Registrations { get; set; }
     public DbSet<UserProfile> UserProfiles { get; set; }
 
 
