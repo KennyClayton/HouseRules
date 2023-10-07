@@ -49,14 +49,13 @@ public class ChoreController : ControllerBase
     // [Authorize]
     public IActionResult GetAChoreByIdWithCompletions(int id)
     {
-        
         Chore chore = _dbContext.Chores
         .Include(c => c.ChoreCompletions)
         .SingleOrDefault(c => c.Id == id);
         if (chore == null)
-            {
-                return NotFound();
-            }
+        {
+            return NotFound();
+        }
         return Ok(chore);
     }
 
@@ -65,7 +64,32 @@ public class ChoreController : ControllerBase
     //~ Use a query string parameter to indicate the userId that will be assigned to the chore matching the id in the URL.
     //~ Set the CompletedOn property in the controller method so that the client doesn't have to pass it in.
     //~ This endpoint can return a 204 No Content response once it has created the completion.
+    [HttpPost("{id}/complete")] //*This parameter allows you to capture the id value from the URL route.
+    // [Authorize]
+    public IActionResult PostNewCompletedChore(int id, [FromQuery] int userId) //* These 2 parameters allow you to capture the id values from the URL route. So in Postman if I enter this, it will assign chore 3 as being completed by userProfileId 2 "https://localhost:5001/api/chore/3/complete?userprofileid=2" Because it is taking the 3 as int id for which chore Id to update...and it is taking the 2 as the FromQuery int userId (and remember userid and id could be called anything we wanted, so it didn't have to be userProfileId....it's just a variable)
+    {
+        //Get a chore by taking the chore Id from the user and searching the database for a match
+        Chore chore = _dbContext.Chores.SingleOrDefault(c => c.Id == id);
+        if (chore == null)
+        {
+            return NotFound("No chore by that id exists");
+        }
+        //Create a new chore completion
+        var choreCompleted = new ChoreCompletion
+        {
+            UserProfileId = userId, // Replace with the userProfileId passed in the POST request
+            UserProfile = null, // You can populate UserProfile if needed
+            ChoreId = id,
+            Chore = chore, //set the Chore property to the instance of the chore passed to us by the user
+            CompletedOn = DateTime.Now // Set the CompletedOn property to the current date and time
+        };
+        // Add the chore completion to the database context
+        _dbContext.ChoreCompletions.Add(choreCompleted);
+        _dbContext.SaveChanges();
 
+        // Return a 204 No Content response
+        return NoContent();
+    }
 
 
     //^ ENDPOINTS
