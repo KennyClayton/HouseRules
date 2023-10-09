@@ -176,10 +176,10 @@ namespace HouseRules.Migrations
                 {
                     Id = table.Column<int>(type: "integer", nullable: false)
                         .Annotation("Npgsql:ValueGenerationStrategy", NpgsqlValueGenerationStrategy.IdentityByDefaultColumn),
-                    FirstName = table.Column<string>(type: "text", nullable: true),
-                    LastName = table.Column<string>(type: "text", nullable: true),
-                    Address = table.Column<string>(type: "text", nullable: true),
-                    IdentityUserId = table.Column<string>(type: "text", nullable: true)
+                    FirstName = table.Column<string>(type: "text", nullable: false),
+                    LastName = table.Column<string>(type: "text", nullable: false),
+                    Address = table.Column<string>(type: "text", nullable: false),
+                    IdentityUserId = table.Column<string>(type: "text", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -188,7 +188,8 @@ namespace HouseRules.Migrations
                         name: "FK_UserProfiles_AspNetUsers_IdentityUserId",
                         column: x => x.IdentityUserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -247,12 +248,12 @@ namespace HouseRules.Migrations
             migrationBuilder.InsertData(
                 table: "AspNetRoles",
                 columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
-                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "b70838ec-576f-48e9-8f00-3a1ba9150f7b", "Admin", "admin" });
+                values: new object[] { "c3aaeb97-d2ba-4a53-a521-4eea61e59b35", "ab61d367-af22-47e9-a335-f2d2a5ddaf7c", "Admin", "admin" });
 
             migrationBuilder.InsertData(
                 table: "AspNetUsers",
                 columns: new[] { "Id", "AccessFailedCount", "ConcurrencyStamp", "Email", "EmailConfirmed", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "SecurityStamp", "TwoFactorEnabled", "UserName" },
-                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "abd6775d-c5d4-43ea-9a39-a28fc4e973eb", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEGr86Lj6Uve44r2+E8AAzANyRmkZ4nVNN8FVt6H66beIces2o7Phzfy27no2/QHnNA==", null, false, "1546eef0-2562-43c4-964c-99432d4cf17d", false, "Administrator" });
+                values: new object[] { "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f", 0, "53af1e38-0b1c-4d36-ae8c-2ff409249e9f", "admina@strator.comx", false, false, null, null, null, "AQAAAAEAACcQAAAAEL2B32EStupJC5xZLKP+EQEiL5QJ1dRQB+eOhzIvRMSF0uLZN01skT6xy1y2t3VOBw==", null, false, "d9271fae-e612-4eee-a90b-4aadcd4788ad", false, "Administrator" });
 
             migrationBuilder.InsertData(
                 table: "Chores",

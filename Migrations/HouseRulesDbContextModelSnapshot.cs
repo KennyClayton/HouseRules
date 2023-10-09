@@ -176,15 +176,19 @@ namespace HouseRules.Migrations
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
                     b.Property<string>("Address")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("FirstName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("IdentityUserId")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.Property<string>("LastName")
+                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
@@ -233,7 +237,7 @@ namespace HouseRules.Migrations
                         new
                         {
                             Id = "c3aaeb97-d2ba-4a53-a521-4eea61e59b35",
-                            ConcurrencyStamp = "b70838ec-576f-48e9-8f00-3a1ba9150f7b",
+                            ConcurrencyStamp = "ab61d367-af22-47e9-a335-f2d2a5ddaf7c",
                             Name = "Admin",
                             NormalizedName = "admin"
                         });
@@ -332,13 +336,13 @@ namespace HouseRules.Migrations
                         {
                             Id = "dbc40bc6-0829-4ac5-a3ed-180f5e916a5f",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "abd6775d-c5d4-43ea-9a39-a28fc4e973eb",
+                            ConcurrencyStamp = "53af1e38-0b1c-4d36-ae8c-2ff409249e9f",
                             Email = "admina@strator.comx",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
-                            PasswordHash = "AQAAAAEAACcQAAAAEGr86Lj6Uve44r2+E8AAzANyRmkZ4nVNN8FVt6H66beIces2o7Phzfy27no2/QHnNA==",
+                            PasswordHash = "AQAAAAEAACcQAAAAEL2B32EStupJC5xZLKP+EQEiL5QJ1dRQB+eOhzIvRMSF0uLZN01skT6xy1y2t3VOBw==",
                             PhoneNumberConfirmed = false,
-                            SecurityStamp = "1546eef0-2562-43c4-964c-99432d4cf17d",
+                            SecurityStamp = "d9271fae-e612-4eee-a90b-4aadcd4788ad",
                             TwoFactorEnabled = false,
                             UserName = "Administrator"
                         });
@@ -474,7 +478,9 @@ namespace HouseRules.Migrations
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
                         .WithMany()
-                        .HasForeignKey("IdentityUserId");
+                        .HasForeignKey("IdentityUserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("IdentityUser");
                 });

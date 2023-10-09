@@ -14,4 +14,4 @@ public class ChoreCompletion
     // [Required]
     public DateTime CompletedOn { get; set; }
 
-}
+} 
